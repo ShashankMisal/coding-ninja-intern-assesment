@@ -1,24 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import { Box } from '@mui/material';
+import Container from '@mui/material/Container';
+import { makeStyles } from '@mui/styles';
+import Categories from './Components/Categories';
+import SubCategories from './Components/SubCategories';
+
+const useStyles = makeStyles({
+  container: {
+    background: '#ffffff',
+    border: 1,
+    borderRadius: 3,
+    boxShadow: '0 3px 5px 2px rgba(255, 105, 100, .3)',
+    color: 'white',
+    height: '100vh',
+    zIndex: '1',
+    // position: 'relative'
+  },
+});
+
 
 function App() {
+  const classes = useStyles();
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      <Container>
+      <Box className={classes.container}>
+         <Categories/>
+         <SubCategories/>
+
+      </Box>
+      </Container>
   );
 }
 
