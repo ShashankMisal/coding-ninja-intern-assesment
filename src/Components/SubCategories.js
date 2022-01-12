@@ -39,18 +39,22 @@ export default function SubCategories({setParams}) {
         },
     ]
 
+    const handleSubCategory = (subcategory)=>{
+        setParams(prev => {
+            setClickedSubCat(subcategory.id);
+            return {
+                ...prev,
+                event_sub_category: subcategory.name
+            }
+        })
+    }
+
     return (
         <Box width="100" color="black" padding="18px 0px" backgroundColor="#ffffff" borderBottom="1px solid lightgrey">
             <Grid container justifyContent="flex-start">
                 {
                     categoriesList.map((subcategory) => (
-                        <Grid key={subcategory.id} onClick={() => setParams(prev => {
-                            setClickedSubCat(subcategory.id);
-                            return {
-                                ...prev,
-                                event_sub_category: subcategory.name
-                            }
-                        })} item xs={4} md={2} className={classes.item} >
+                        <Grid key={subcategory.id} onClick={() => handleSubCategory(subcategory)} item xs={4} md={2} className={classes.item} >
                             <Typography variant="body" className={classes.typography} style={{ color: (clickedSubCat === subcategory.id) ? "#fa7328" : "grey" }}>
                                 {subcategory.name}
                             </Typography>

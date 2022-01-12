@@ -18,7 +18,6 @@ const useStyles = makeStyles({
         },
     },
     typography: {
-        // color: "grey",
         marginLeft: "5px !important",
         fontWeight: 500
     }
@@ -32,31 +31,47 @@ export default function Categories({setParams}) {
 
     const categoriesList = [
         {
-            name: "ALL EVENTS",
+            name: "All Events",
+            apiParam:"ALL_EVENTS",
             icon: <EventIcon />,
             id: "1"
         },
         {
             name: "Webinars",
+            apiParam:"WEBINAR",
             icon: <AirplayIcon />,
             id: "2"
         },
         {
-            name: "Coding Events",
+            name: "Coding Event",
+            apiParam:"CODING_EVENT",
             icon: <EventAvailableIcon />,
             id: "3"
         },
         {
             name: "Bootcamp Events",
+            apiParam:"BOOTCAMP_EVENT",
             icon: <CampaignIcon />,
             id: "4"
         },
         {
             name: "Workshop",
+            apiParam:"WORKSHOP",
             icon: <VideoCameraFrontIcon />,
             id: "5"
         },
     ]
+
+    const handleClick = (category) =>{
+        setClicked(category.id)
+        return (
+            setParams(prev => ({
+                ...prev,
+                event_category: category.apiParam
+            })
+            )
+        );
+    }
 
 
 
@@ -65,16 +80,7 @@ export default function Categories({setParams}) {
             <Grid container justifyContent="flex-start">
                 {
                     categoriesList.map((category) => (
-                        <Grid key={category.id} item xs={4} md={2} className={classes.item} onClick={()=>{
-                            setClicked(category.id)
-                            return (
-                                setParams(prev => ({
-                                        ...prev,
-                                        event_category: category.name.toUpperCase()
-                                    })
-                                )  
-                            );
-                        }} style={{ color: (clicked === category.id) ? "#fa7328" : "grey" }} >
+                        <Grid key={category.id} item xs={4} md={2} className={classes.item} onClick={()=>handleClick(category)} style={{ color: (clicked === category.id) ? "#fa7328" : "grey" }} >
                             {category.icon}
                             <Typography variant="body" className={classes.typography} >
                                 {category.name}

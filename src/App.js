@@ -13,7 +13,7 @@ const useStyles = makeStyles({
     background: '#ffffff',
     border: 1,
     borderRadius: 3,
-    boxShadow: '0 3px 5px 2px rgba(255, 105, 100, .3)',
+    boxShadow: '0 3px 5px 2px rgba(255, 205, 200, .3)',
     color: 'white',
     height: '100%',
     zIndex: '1',
@@ -35,23 +35,22 @@ function App() {
 
 
  
-
   return (
       <Container>
-      <Box className={classes.container}>
-        <Categories setParams={setParams}/>
-        <SubCategories setParams={setParams}/>
-        <Box backgroundColor="#fef4ee82">
-            <Grid container>
-                <Grid item md={9.5}>
-                    <EventCards params={params} />
-                </Grid>
-                <Grid item md={2.5}>
-              <TagList setParams={setParams}/>
-                </Grid>
-            </Grid>
-         </Box>
-      </Box>
+        <Box className={classes.container}>
+          <Categories setParams={setParams}/>
+          <SubCategories setParams={setParams}/>
+          <Box backgroundColor="#fef4ee82">
+              <Grid container>
+                  <Grid item md={9.5}>
+              <EventCards params={params} setParams={setParams}  />
+                  </Grid>
+                  <Grid item md={2.5}>
+                <TagList setParams={setParams}/>
+                  </Grid>
+              </Grid>
+          </Box>
+        </Box>
       </Container>
   );
 }
