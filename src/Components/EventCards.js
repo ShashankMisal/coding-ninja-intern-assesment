@@ -41,7 +41,9 @@ function EventCards({params}) {
 
        <Grid container justifyContent="center" spacing={2}>
 
-            {
+            {   
+
+               (data?.data?.events.length!==0) ? (
                     data?.data?.events?.map((event)=>(
                     <Grid key={event.id} item xs={12} md={6} className={classes.item}>
                         <Card sx={{ maxWidth: 395 }}>
@@ -81,9 +83,14 @@ function EventCards({params}) {
                                 <Grid container>
                                     <Grid item xs={8}>
                                         {
-                                            event.registered_users.top_users.map((user,index)=>(
+                                                event.registered_users?.top_users?.length!==0?(
+                                            event.registered_users?.top_users?.map((user,index)=>(
                                                 <Avatar key={index} component="span" className={classes.avatar} sx={{ width: 23, height: 23 }} src={user.image_url}></Avatar>
-                                            ))
+                                                ))
+                                                ):(
+                                                <Avatar component="span" className={classes.avatar} sx={{ width: 23, height: 23 }}>No</Avatar>
+                                            )
+
                                         }
                                     
                                         <Typography variant="subtitle2">and <span style={{fontWeight:"bold"}}>{event.registered_users.other_users_count}</span> others are participating</Typography>
@@ -97,7 +104,15 @@ function EventCards({params}) {
                         </Card>
                     </Grid>
 
-                ))
+                    ))
+
+                    ):(
+                        <Grid>
+                            <Typography variant="h4" style={{color:"black"}}>
+                                No events found
+                            </Typography>
+                       </Grid>
+               )
             }
           
               
