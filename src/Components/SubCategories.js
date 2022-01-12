@@ -7,7 +7,10 @@ const useStyles = makeStyles({
     item: {
         display: "flex",
         justifyContent: "center",
-        alignItems: "center"
+        alignItems: "center",
+        '&:hover': {
+            cursor:"pointer"
+        },
     },
     typography:{
         color:"grey",
@@ -16,8 +19,10 @@ const useStyles = makeStyles({
     
 });
 
-export default function SubCategories() {
+export default function SubCategories({setParams}) {
     const classes = useStyles();
+    const [clickedSubCat, setClickedSubCat] = React.useState("1");
+
 
     const categoriesList = [
         {
@@ -25,7 +30,7 @@ export default function SubCategories() {
             id: "1"
         },
         {
-            name: "Archieved",
+            name: "Archived",
             id: "2"
         },
         {
@@ -39,8 +44,14 @@ export default function SubCategories() {
             <Grid container justifyContent="flex-start">
                 {
                     categoriesList.map((subcategory) => (
-                        <Grid key={subcategory.id} item xs={4} md={2} className={classes.item}>
-                            <Typography variant="body" className={classes.typography}>
+                        <Grid key={subcategory.id} onClick={() => setParams(prev => {
+                            setClickedSubCat(subcategory.id);
+                            return {
+                                ...prev,
+                                event_sub_category: subcategory.name
+                            }
+                        })} item xs={4} md={2} className={classes.item} >
+                            <Typography variant="body" className={classes.typography} style={{ color: (clickedSubCat === subcategory.id) ? "#fa7328" : "grey" }}>
                                 {subcategory.name}
                             </Typography>
                         </Grid>

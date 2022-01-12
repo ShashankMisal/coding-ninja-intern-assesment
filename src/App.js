@@ -1,3 +1,4 @@
+import React from 'react'
 import { Box, Grid } from '@mui/material';
 import Container from '@mui/material/Container';
 import { makeStyles } from '@mui/styles';
@@ -5,7 +6,7 @@ import Categories from './Components/Categories';
 import EventCards from './Components/EventCards';
 import SubCategories from './Components/SubCategories';
 import TagList from './Components/TagList';
-import { useGetEventTagsQuery } from './services/codingNinjaApi';
+
 
 const useStyles = makeStyles({
   container: {
@@ -23,23 +24,30 @@ const useStyles = makeStyles({
 
 function App() {
   const classes = useStyles();
-  const { data, isFetching } = useGetEventTagsQuery();
+  const [params, setParams] = React.useState({
+    event_category: "ALL EVENTS",
+    event_sub_category: "Upcoming",
+    tag_list: "",
+    offset: 0
+  });
 
-  if(!isFetching)
-  console.log(data?.data.tags);
+  console.log(params);
+
+
+ 
 
   return (
       <Container>
       <Box className={classes.container}>
-         <Categories/>
-         <SubCategories/>
-        <Box backgroundColor="#fef6f1">
+        <Categories setParams={setParams}/>
+        <SubCategories setParams={setParams}/>
+        <Box backgroundColor="#fef4ee82">
             <Grid container>
                 <Grid item md={9.5}>
-                    <EventCards/>
+                    <EventCards params={params} />
                 </Grid>
                 <Grid item md={2.5}>
-                    <TagList/>
+              <TagList setParams={setParams}/>
                 </Grid>
             </Grid>
          </Box>

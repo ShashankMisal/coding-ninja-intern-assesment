@@ -12,17 +12,23 @@ const useStyles = makeStyles({
     item: {
         display: "flex",
         justifyContent: "center",
-        alignItems: "center"
+        alignItems: "center",
+        '&:hover': {
+            cursor: "pointer"
+        },
     },
     typography: {
-        color: "grey",
+        // color: "grey",
         marginLeft: "5px !important",
         fontWeight: 500
     }
 });
 
-export default function Categories() {
+export default function Categories({setParams}) {
     const classes = useStyles();
+    const [clicked,setClicked] = React.useState("1");
+
+    // console.log(setParams);
 
     const categoriesList = [
         {
@@ -52,14 +58,25 @@ export default function Categories() {
         },
     ]
 
+
+
     return (
-        <Box width="100" color="grey" padding="18px 0px" backgroundColor="#fef6f1" borderBottom="1px solid lightgrey">
+        <Box width="100" color="grey" padding="18px 0px" backgroundColor="#fef4ee82" borderBottom="1px solid lightgrey">
             <Grid container justifyContent="flex-start">
                 {
                     categoriesList.map((category) => (
-                        <Grid key={category.id} item xs={4} md={2} className={classes.item}>
+                        <Grid key={category.id} item xs={4} md={2} className={classes.item} onClick={()=>{
+                            setClicked(category.id)
+                            return (
+                                setParams(prev => ({
+                                        ...prev,
+                                        event_category: category.name.toUpperCase()
+                                    })
+                                )  
+                            );
+                        }} style={{ color: (clicked === category.id) ? "#fa7328" : "grey" }} >
                             {category.icon}
-                            <Typography variant="body" className={classes.typography}>
+                            <Typography variant="body" className={classes.typography} >
                                 {category.name}
                             </Typography>
                         </Grid>

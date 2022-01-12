@@ -11,7 +11,7 @@ export const codingNinjaApi = createApi({
             query: () => ("/event_tags")
         }),
         getEvents: builder.query({
-            query: ({ coinId, timeperiod }) => `events/${coinId}/history/${timeperiod}`,
+            query: ({ event_category, event_sub_category, tag_list, offset }) => (`/events?event_category=${event_category}&event_sub_category=${event_sub_category}&tag_list=${tag_list}&offset=${offset}`)
         }),
     })
 })
