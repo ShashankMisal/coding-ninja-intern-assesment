@@ -48,7 +48,7 @@ export default function Categories() {
         {
             name: "Workshop",
             icon: <VideoCameraFrontIcon />,
-            id: "4"
+            id: "5"
         },
     ]
 
@@ -57,7 +57,7 @@ export default function Categories() {
             <Grid container justifyContent="flex-start">
                 {
                     categoriesList.map((category) => (
-                        <Grid item xs={4} md={2} className={classes.item}>
+                        <Grid key={category.id} item xs={4} md={2} className={classes.item}>
                             {category.icon}
                             <Typography variant="body" className={classes.typography}>
                                 {category.name}

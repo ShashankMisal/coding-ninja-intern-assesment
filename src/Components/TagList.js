@@ -50,8 +50,8 @@ function TagList() {
                     <Typography variant="h6" style={{ fontWeight: "600", color: "grey" }}>TAGS</Typography>
                 </Grid>
                 {
-                    taglist.map((tag) => (
-                        <Grid item xs={12} className={classes.item}>
+                    taglist.map((tag,index) => (
+                        <Grid key={index} item xs={12} className={classes.item}>
                             <Typography variant="body2" component="span" className={classes.typography} >
                                 {tag.tagName}
                             </Typography>

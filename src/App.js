@@ -5,6 +5,7 @@ import Categories from './Components/Categories';
 import EventCards from './Components/EventCards';
 import SubCategories from './Components/SubCategories';
 import TagList from './Components/TagList';
+import { useGetEventTagsQuery } from './services/codingNinjaApi';
 
 const useStyles = makeStyles({
   container: {
@@ -22,6 +23,11 @@ const useStyles = makeStyles({
 
 function App() {
   const classes = useStyles();
+  const { data, isFetching } = useGetEventTagsQuery();
+
+  if(!isFetching)
+  console.log(data?.data.tags);
+
   return (
       <Container>
       <Box className={classes.container}>
